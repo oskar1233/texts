@@ -1,4 +1,4 @@
-# Angular 4 - first contact
+# Angular 4 - first contact, API service, Http testing
 
 ## Introduction
 
@@ -209,3 +209,5 @@ TestBed.configureTestingModule({
 Aaaand it's done. We can make similar test to cover 'post', 'put', 'patch' and 'delete' methods - with provided code it's trivial.
 
 We can add some more complicated functionallity to our API service, like providing headers for authentication before sending request or logging all the requests. It's possible that I will cover adding JWT to our service in next articles.
+
+Don't forget to check out the full code [here](https://github.com/oskar1233/texts/tree/master/AngularHttpTest "Repo")!
