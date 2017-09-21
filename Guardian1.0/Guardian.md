@@ -6,15 +6,17 @@ If you want to understand all the stuff described here, visit [docs](https://hex
 
 # Creating a new project
 
-I'll be using the newer (1.3.0) version of Phoenix here. We won't also need brunch/html stuff. We will test our application using ExUnit and some curl commands. Command for creating new project looks like this:
+I'll be using the newer (1.3.0) version of Phoenix here and test the application using ExUnit. Command for creating new project looks like this:
 
 ``` bash
 mix phx.new sample_guardian --no-brunch --no-html
 ```
 
-Use `config/test.exs` and `config/dev.exs` to configure your database depending on your needs. I am using Postgres so the default configuration works for me (except of credentials).
+as we don't need no brunch/html stuff.
 
-Now, we will need to add Guardian as a dependency. We open up our mix.exs file and add `{:guardian, "~> 1.0"}` to our `deps` so they look similar to this:
+Use `config/test.exs` and `config/dev.exs` to configure your database depending on your needs. I am using Postgres so the default configuration works for me.
+
+Now, we will need to add Guardian as a dependency. We open up our mix.exs file and add `{:guardian, "~> 1.0-beta"}` to our `deps` so they look similar to this:
 
 ``` elixir
 [
