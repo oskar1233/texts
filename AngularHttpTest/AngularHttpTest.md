@@ -1,8 +1,8 @@
-# Angular 4 - first contact, API service, Http testing
+# Angular 4 - Http testing, API service
 
 ## Introduction
 
-I've never used TDD project-wide before. This time I want to try it hard especially when writing services. I want to learn mocking and refactoring based on the tests (DI etc.). In this article I'll (try to) cover creating really simple API service and test for it, so it can be extended with more complex functionallity later. As for now, it will be simple wrapper around Angular's Http service.
+In this article I'll (try to) cover creating really simple API service and test for it, so it can be extended later with more complex functionallity later. As for now, it will be simple wrapper around Angular's Http service.
 
 Let's go!
 
@@ -10,23 +10,19 @@ Let's go!
 
 ## Why do I need API service?
 
-I am creating the API service for the purpose of easily isolate storing my API's URL and connecting to it by low level API like Angular's $http or simply Ajax. If done right, the low-level connecting API can be changed later based on requirements. In addition we can easily add e. g. logging feature for all of our requests.
+I am creating the API service for the purpose of easily isolating storage of my API's URL and connecting to it by low level API like Angular's $http or simply Ajax. If done right, the low-level connecting API can be changed later based on requirements. In addition we can easily add e. g. logging feature for all of our requests.
 
-The API service will be used by other modules like authentication, users etc. so we'll need to create a mock for it as well.
+The API service will be used by other modules obviously so I'll need to create a mock of it as well.
 
 ## File structure
 
-[Angular Style Guide](https://angular.io/guide/styleguide "Angular - Style Guide") tells us to organize our folders basing on feature. That way we can easily organize our feature's files in single NgModule. So, let's do it the right way.
+[Angular Style Guide](https://angular.io/guide/styleguide "Angular - Style Guide") tells us to organize our files basing on feature and tie them up in `NgModule`s. Let's do it this right way.
 
-### Do we need separate API module (and folder)?
-
-The API service will be widely used by all features and modules, so it will fit perfect to [`Shared` feature (folder)](https://angular.io/guide/styleguide#shared-feature-module "Angular - Style guide - Shared feature module"). I'll build a SharedModule as well to include shared services and component.
-
-Ok then, let's move on to creating the service!
+The API service will be widely used by all features and modules, so it will fit perfect to [`Shared` feature (folder)](https://angular.io/guide/styleguide#shared-feature-module "Angular - Style guide - Shared feature module"). I'll build a SharedModule as well to include shared services and components.
 
 ## Angular CLI
 
-I am using Angular CLI for generating template files of my project. First I want to see what files would it exactly create, so I use --dry-run switch. In my terminal I type `ng generate service shared/api --dry-run` or shorter way `ng g s shared/api --dry-run`.
+I am using Angular CLI for generating template files of my project. First, I want to see what files would it exactly create, so I use --dry-run switch. In my terminal I type `ng generate service shared/api --dry-run` or shorter way `ng g s shared/api --dry-run`.
 
 ![ng-generate-api-dry](ng-generate-api-dry.jpg "ng output")
 
@@ -44,9 +40,9 @@ it('should be created', inject([ApiService], (service: ApiService) => {
 }));
 ```
 
-It tests if our service is created succesfully. Let's run karma (`npm test` or `ng test`) and check if the test passes as it should.
+It tests if our service is created succesfully. Let's run karma (`npm test` or `ng test`) and check if the test passes.
 
-Assuming everything went right, now we should create some more spec for our service.
+Assuming everything went right, we move on to create some more spec for our service.
 
 # `request` function
 ## Make it exist
@@ -64,9 +60,13 @@ describe('#request', () => {
 The test will obviously fail, so I add the `request` method to `app/shared/api.service.ts` so it looks like this:
 
 ```typescript
-it('should have request method', inject([ApiService], (service: ApiService) => {
-  expect(service.request).toBeDefined();
-}));
+@Injectable()
+export class ApiService {
+
+  request() {
+  }
+
+}
 ```
 
 Now the test should pass.
@@ -141,6 +141,8 @@ beforeEach(() => {
 });
 ```
 
+Now we can proceed to testing requests.
+
 ## Testing HTTP method
 
 So how do we test the HTTP method? Really simply. Just take a look at my brand new test's code:
@@ -164,7 +166,7 @@ it('should use get http method when provided', () => {
 });
 ```
 
-Here I am using `request` function with `'get'` string as a parameter and `subscribe` to its return value following Angular's convention: using `Observable` for HTTP requests.
+Here I am using `request` function with `get` string as a parameter and `subscribe` to its return value following Angular's convention: using `Observable` for HTTP requests.
 
 We use `connection` provided by `MockBackend` to test if our `connection.request.method` equals `RequestMethod.Get`. We also `mockRespond` and test it's existance.
 
