@@ -1,6 +1,6 @@
 # Guardian 1.0
 
-I have recently started a new project in Elixir/Phoenix and noticed new Guardian version - 1.0 (in beta at the time I'm writing the article). I couldn't wait to try new, more consistent API of this wonderful authentication library. My integration is done and I decided to write a short tutorial for people starting with Guardian who don't want to dig into documentation too deep.
+I have recently started a new project in Elixir/Phoenix and noticed new Guardian version - 1.0 (in beta at the time I'm writing this post). I couldn't wait to try new, more consistent API of this wonderful authentication library. My integration is done and I decided to write a short tutorial for people starting with Guardian who don't want to dig into documentation too deep.
 
 If you want to understand all the stuff described here, visit [docs](https://hexdocs.pm/guardian/1.0.0-beta.0/) or at least read the [project's github page (readme)](https://github.com/ueberauth/guardian).
 
@@ -318,4 +318,4 @@ plug Guardian.Permissions.Bitwise, [ensure: %{user: [:invoices]}] when action in
 
 In the sample project you can see most of code used here - it is not working example, but can be used as a base for using new Guardian 1.0.
 
-Thanks for reading
+Thanks for reading!
