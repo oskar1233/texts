@@ -194,7 +194,7 @@ constructor(
 
 ## `HttpModule`
 
-Now our test is failing because of `Error: no provider for Http!`. Let's provide `HttpModule` in our suite's configuration.
+Now our test is failing because of `Error: no provider for Http!`. Let's import `HttpModule` in our suite's configuration.
 
 ```typescript
 TestBed.configureTestingModule({
