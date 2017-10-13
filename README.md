@@ -1,3 +1,5 @@
+[Visit my blog](https:/oskar1233.eu), you'll probably find everything from here and more.
+
 Here are some my texts, such as blog posts, articles etc. Feel free to read them.
 
 # Licence
